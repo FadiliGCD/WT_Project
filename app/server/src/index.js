@@ -3,7 +3,9 @@ const cors = require("cors");
 require("dotenv").config();
 
 const connectDB = require("./db");
-const authRoutes = require("./routes/auth.routes");   // ← ADD THIS
+const authRoutes = require("./routes/auth.routes");
+const recipesRoutes = require("./routes/recipes.routes");
+const mealplanRoutes = require("./routes/mealplan.routes");
 
 const app = express();
 
@@ -15,8 +17,10 @@ app.get("/api/health", (req, res) => {
   res.json({ ok: true, message: "Server running" });
 });
 
-// Register auth routes
-app.use("/api/auth", authRoutes);   // ← ADD THIS
+// Register routes
+app.use("/api/auth", authRoutes);
+app.use("/api/recipes", recipesRoutes);
+app.use("/api/mealplan", mealplanRoutes);
 
 const PORT = process.env.PORT || 5000;
 
